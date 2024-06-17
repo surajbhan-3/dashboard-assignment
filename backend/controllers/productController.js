@@ -1,9 +1,6 @@
 const {prisma } = require("../config/db.js")
 
 const addProduct = async(req,res)=>{
-    res.setHeader('Access-Control-Allow-Origin', 'https://dashboard-assignment-xi.vercel.app');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST,PUT,PATCH,DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     const {name, image,price,type,description}=req.body;
     const {userId} = req.params;
     const authenticatedUserId = req.body.userId
@@ -48,9 +45,7 @@ const addProduct = async(req,res)=>{
 }
 
 const editProduct = async(req,res)=>{
-    res.setHeader('Access-Control-Allow-Origin', 'https://dashboard-assignment-xi.vercel.app');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST,PUT,PATCH,DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  
     const {name, image,price,type, description}=req.body;
     const {userId,id} = req.params;
     const authenticatedUserId = req.body.userId
@@ -94,9 +89,7 @@ const editProduct = async(req,res)=>{
 }
 
 const deleteProduct = async(req,res)=>{
-    res.setHeader('Access-Control-Allow-Origin', 'https://dashboard-assignment-xi.vercel.app');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST,PUT,PATCH,DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
     const {userId,id} = req.params;
     const authenticatedUserId = req.body.userId
     try {

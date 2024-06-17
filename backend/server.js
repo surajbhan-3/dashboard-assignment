@@ -6,16 +6,24 @@ const userRouter = require("./routes/userRoutes")
 const productRouter = require("./routes/productRoutes")
 
 const PORT = process.env.PORT 
-const corsOptions = {
-  origin: 'https://dashboard-assignment-xi.vercel.app',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+// const corsOptions = {
+//   origin: 'https://dashboard-assignment-xi.vercel.app',
+//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+// }
 
 
 const app = express()
 
 app.use(express.json())
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
+
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'https://dashboard-assignment-xi.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+  });
 
 
 app.get("/", async(req,res)=>{

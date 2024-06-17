@@ -4,8 +4,8 @@
 
 // production server
 
-const API_BASE_URL = window.location.origin;
-export const AUTH_BASE_URL = window.location.origin;
+const API_BASE_URL = 'https://dashboard-assignment-ec41-flj65ag33-surajbhan3s-projects.vercel.app/';
+export const AUTH_BASE_URL = 'https://dashboard-assignment-ec41-flj65ag33-surajbhan3s-projects.vercel.app/';
 
 
 ///  This  is because for the brower to get token i have refresh once after login

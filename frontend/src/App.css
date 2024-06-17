@@ -16,9 +16,13 @@
 }
 
 /* register page and login page css */
-.register-form-heading,.login-form-heading, .edit-form-heading, .add-product-form-heading{
+.register-form-heading,.login-form-heading, .edit-form-heading{
   text-align: center;
   margin-top: 8%;
+}
+.add-product-form-heading{
+  text-align: center;
+  margin-top: 3%;
 }
 
 #register-main, #login-main{
@@ -96,7 +100,6 @@
 }
 .home-main-container{
   width: 80%;
-  background-color: blueviolet;
 }
 .h-top-bar{
   width: 100%;
@@ -128,7 +131,7 @@
   justify-content: space-around;
   background-color: rgb(92, 89, 89);
   flex-wrap: wrap;
-
+  padding: 10px;
 }
 
 /* card component */
@@ -149,6 +152,51 @@
   object-fit: cover;
 }
 
+.yp{
+  background-color: rgb(92, 89, 89);
+  font-size: 22px;
+  font-weight: bold;
+  padding: 10px;
+}
+.yp-inner{
+  height: auto;
+  background-color: rgb(92, 89, 89);
+  font-size: 18ox;
+  font-weight: bold;
+  padding: 10px;
+  margin-top: 10px;
+  /* border: 1px solid red; */
+
+}
+
+.add-product-form #login-main{
+  border: 1px solid black;
+}
+#mbb-6{
+  margin-top: -40px;
+}
+
+#rbn{
+  border: 1px solid black;
+  margin-right: 45vw;
+  margin-top: 45vh;
+}
+#rbn button{
+  border: none;
+  margin: 10px;
+  background-color: inherit;
+  color: white;
+  font-size: 20px;
+}
+#rbn button:hover #sp-2{
+           display: block;
+}
+#rbn button:hover #sp-1{
+  display: none;
+}
+#sp-2{
+  display: none;
+}
 
 @media (max-width:820px) {
   .card-wrapper{

@@ -16,7 +16,7 @@ export const AUTH_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
 
 
 
-export  const Token = localStorage.getItem("token");
+export const getToken = () => localStorage.getItem("token");
 
 
 const apiConfig = {
@@ -24,7 +24,7 @@ const apiConfig = {
 
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${Token}`,
+    'Authorization': `Bearer ${getToken()}`,
   },
   // timeout: 5000, // Request timeout in milliseconds
 };

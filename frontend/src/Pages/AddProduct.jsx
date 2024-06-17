@@ -6,25 +6,33 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 
 function Addproduct() {
-
 const navigate = useNavigate()
 
 const userId = localStorage.getItem('userId')
 
 
 const onSubmit = async (values, { setSubmitting }) => {
-    setTimeout(() => {
-      console.log('Form data', values);
-      setSubmitting(false);
-    }, 500);
-    const response = await apiService.post(`/${userId}/add_product`,values)
+  
+     if(values.settime){
+       console.log(values.settime, 'hello')
+       setTimeout(async() => {
+           const response = await apiService.post(`/${userId}/add_product`,values)
    console.log(response, "resopndedd")
 
    if(response.data.result === true){
     alert("Product added successfully")
      navigate(`/${userId}/home`)
    }
-
+      }, values.settime*60*1000);
+     }else{
+      const response = await apiService.post(`/${userId}/add_product`,values)
+      console.log(response, "resopndedd")
+      if(response.data.result === true){
+        alert("Product added successfully")
+         navigate(`/${userId}/home`)
+       }
+      console.log(values.settime, typeof(values.settime))
+     }
   };
 
 
@@ -33,7 +41,8 @@ const initialValues = {
     image: '',
     price: '',
     description:'',
-    type:''
+    type:'',
+    settime:''
 
   };
 
@@ -43,13 +52,14 @@ const initialValues = {
     description: Yup.string().min(20, "minimum 20 characters are required")
     .required('product description required'),
     price:Yup.number('it must be a number').required('price is required'),
+    settime:Yup.number('it must be a number'),
     type:Yup.string().required('catgory is required').oneOf(['electronics', 'clothing', 'books'])
 
   });
 
 
   return (
-    <div>
+    <div className='add-product-form'>
     <h1 className='add-product-form-heading'>Add Product</h1>
     <Formik
       initialValues={initialValues}
@@ -57,7 +67,7 @@ const initialValues = {
       onSubmit={onSubmit}
     >
       {({ isSubmitting }) => (
-        <Form id='login-main'>
+        <Form id='login-main' >
           <fieldset>
             <div className='mb-1'>
               <label htmlFor="product_name" className='form-label required'>Product Name</label>
@@ -83,7 +93,7 @@ const initialValues = {
           <fieldset>
           <div className='mb-4'>
               <label htmlFor="price" className='form-label required'>Price</label>
-              <Field type="text" id="price" className='form-control' name="price" />
+              <Field type="number" id="price" className='form-control' name="price" />
               <ErrorMessage name="price" component="div" />
             </div>
            </fieldset>
@@ -102,20 +112,18 @@ const initialValues = {
               </div>
             </fieldset>
 
+            <fieldset>
+          <div className='mb-6' id='mbb-6'>
+              <label htmlFor="settime" className='form-label required'>Set Delay Time (minutes)</label>
+              <Field type="number" id="settime" className='form-control' name="settime"  />
+              <ErrorMessage name="settime" component="div" />
+            </div>
+           </fieldset>
+
            <fieldset>
-            <div>
+            <div className='mb-7'>
               <button id='login-btn' className='form-control' type="submit" disabled={isSubmitting}>
                 Submit
-              </button>
-            </div>
-          </fieldset>
-          <fieldset>
-            <div>
-              <button id='new-user-btn' className='form-control btn' data-bs-toggle="popover" 
-               data-bs-content="And here's some amazing content. It's very engaging. Right?"
-               type='button'
-              disabled={isSubmitting}>
-                 priview
               </button>
             </div>
           </fieldset>

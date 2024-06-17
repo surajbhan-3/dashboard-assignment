@@ -50,8 +50,9 @@ useEffect(() => {
 }, [type,minPrice,maxPrice]);
 
 useEffect(() => {
+  console.log("sorteign")
   sortProducts();
-}, []);
+}, [sortOrder]);
 
 const filterProducts = () => {
  
@@ -79,17 +80,31 @@ const filterProducts = () => {
 
 const sortProducts = () => {
   let sorted = [...filteredProducts];
-
   sorted.sort((a, b) => {
     if (sortOrder === 'asc') {
-      return new Date(a.createdAt) - new Date(b.createdAt);
+      return new Date(a.date) - new Date(b.date);
     } else {
-      return new Date(b.createdAt) - new Date(a.createdAt);
+      return new Date(b.date) - new Date(a.date);
     }
   });
 
   setFilteredProducts(sorted);
 };
+
+
+const handleDelete = async(p_id)=>{
+  console.log(p_id, "hellosdfsdfsd")
+  const response = await apiService.delete(`/${userId}/delete_product/${p_id}`)
+  console.log(response)
+  if(response.status === 204){
+    const filterData = data.filter((el)=>{
+        if(el.id !== p_id){
+          return el;
+        }
+    })
+    setFilteredProducts(filterData)
+  }
+}
 
 const disableButtons = true;
   return (
@@ -176,6 +191,7 @@ const disableButtons = true;
                 title={el.name}
                 description={el.description}
                 price={el.price}
+                onDelete = {handleDelete}
               />
             ))}
                            
@@ -197,14 +213,14 @@ const disableButtons = true;
                                   title="Rockerz 450 DC"
                                   description="Wireless Bluetooth Headphone with 40mm Dynamic Drivers, Upto 15 Hours Playback, Adaptive Headband"
                                   price="1250"
-                                  disabled={disableButtons}
+                                  disableButtons={disableButtons}
                                 />
                               <Card
                                   imageUrl="https://www.boat-lifestyle.com/cdn/shop/products/02-3_700x.jpg?v=1656101712"
                                   title="Rockerz 450 DC"
                                   description="Wireless Bluetooth Headphone with 40mm Dynamic Drivers, Upto 15 Hours Playback, Adaptive Headband"
                                   price="1250"
-                                  disabled={disableButtons}
+                                  disableButtons={disableButtons}
                                 />
                               <Card
                                   imageUrl="https://www.boat-lifestyle.com/cdn/shop/products/02-3_700x.jpg?v=1656101712"
@@ -216,8 +232,10 @@ const disableButtons = true;
           </div>
 
           <div>
-            <div>Your Products</div>
-                <div>No Products  available Please add products </div>
+            <div className='yp' >Your Products</div>
+               <div className='yp-inner'>
+               No Products  available Please add products 
+               </div>
           </div>
             </React.Fragment>
           )

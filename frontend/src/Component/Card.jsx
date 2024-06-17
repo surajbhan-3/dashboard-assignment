@@ -1,17 +1,15 @@
 import React from 'react';
-import { useNavigate, useHistory } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
 
-const Card = ({ imageUrl, title,description, price,product_id,disableButtons}) => {
+const Card = ({ imageUrl, title,description, price,product_id,disableButtons, onDelete}) => {
 const navigate = useNavigate()
 const userId = localStorage.getItem('userId')
 const handleEdit = async()=>{
   navigate(`/${userId}/edit_product/${product_id}`)
 }
 
-const handleDelete = async()=>{
-  navigate(`/${userId}/edit_product/${product_id}`)
-}
+
   return (
     <div className="card">
       {/* Photo */}
@@ -23,7 +21,8 @@ const handleDelete = async()=>{
         <h3 className="card-title">{title}</h3>
         <p className="text-secondary">{description}</p>
         <p className="text-secondary"><b>Price :</b> ₹{price}</p>
-        <button disabled={disableButtons} onClick={handleEdit}>Edit</button> <span><button disabled={disableButtons} onClick={handleDelete}>Delete</button></span>
+        <button disabled={disableButtons} onClick={handleEdit}>Edit</button> 
+        <span><button disabled={disableButtons} onClick={()=>{onDelete(product_id)}}>Delete</button></span>
       </div>
     </div>
   );

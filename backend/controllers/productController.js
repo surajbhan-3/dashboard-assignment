@@ -89,7 +89,7 @@ const editProduct = async(req,res)=>{
 }
 
 const deleteProduct = async(req,res)=>{
-
+console.log("heool")
     const {userId,id} = req.params;
     const authenticatedUserId = req.body.userId
     try {

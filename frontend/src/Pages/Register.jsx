@@ -34,7 +34,13 @@ const Register = () => {
       console.log('Form data', values);
       setSubmitting(false);
     }, 500);
-    const response = await axios.post(`${AUTH_BASE_URL}/api/user/register_user`,values)
+    const response = await axios.post(`${AUTH_BASE_URL}/api/user/register_user`,values,
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
     console.log(response, "resopndedd")
  
     if(response.data.result === true){

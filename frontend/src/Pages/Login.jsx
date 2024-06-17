@@ -28,7 +28,11 @@ const Login = () => {
       console.log('Form data', values);
       setSubmitting(false);
     }, 500);
-   const response = await axios.post(`${AUTH_BASE_URL}/api/user/login`,values)
+   const response = await axios.post(`${AUTH_BASE_URL}/api/user/login`,values, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
    console.log(response, "resopndedd")
 
    if(response.data.result === true){

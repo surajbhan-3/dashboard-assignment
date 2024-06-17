@@ -1,6 +1,5 @@
 const express = require("express")
 const cors =require('cors')
-const path = require('path')
 require("dotenv").config()
 const {prisma} = require("./config/db")
 const userRouter = require("./routes/userRoutes")
@@ -16,7 +15,7 @@ app.use(cors())
 
 
 
-app.get("/r", async(req,res)=>{
+app.get("/", async(req,res)=>{
 
     try {
         res.status(200).send("Welcome to the Backend of Lms")
@@ -48,11 +47,7 @@ const checkDatabaseConnection = async () => {
   
   // Check database connection before starting the server
   checkDatabaseConnection().then(() => {
-    // Vercel deployment specific code
-app.get('/', (req,res)=>{
-  app.use(express.static(path.resolve(__dirname,'frontend', 'build')));
-  res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
-})
+ 
 
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);

@@ -6,12 +6,14 @@ import Login from './Pages/Login';
 import Home from './Pages/Home';
 import AddProduct from './Pages/AddProduct';
 import EditProduct from './Pages/EditProduct';
+import Main from './Pages/Main';
 function App() {
   return (
     <div className="App">
   
   <Routes>
-  <Route path='/' element={<Login />} />
+  <Route path='/' element={<Main />} />
+  <Route path='/login' element={<Login />} />
     <Route path='/register' element={<Register/>} />
     <Route path={`:userId/home`} element={<Home />} />
     <Route path={`:userId/add_product`} element={<AddProduct />} />

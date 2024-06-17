@@ -7,18 +7,18 @@ const productRouter = require("./routes/productRoutes")
 
 const PORT = process.env.PORT || 3000
 const app = express()
-const corsOptions = {
-  origin: '*', // Allowed origins
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',               // Allowed HTTP methods
-  allowedHeaders: 'Content-Type,Authorization',            // Allowed headers in preflight requests
-  exposedHeaders: ['Content-Length', 'Authorization'],    // Headers to expose to the browser
-  credentials: true,                                       // Allow credentials (e.g., cookies)
-  maxAge: 3600,                                            // Cache preflight requests for 1 hour
-  preflightContinue: false,                                // Don't continue processing if CORS checks fail
-  optionsSuccessStatus: 204,                               // HTTP status code for successful preflight requests
-};
+// const corsOptions = {
+//   origin: '*', // Allowed origins
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',               // Allowed HTTP methods
+//   allowedHeaders: 'Content-Type,Authorization',            // Allowed headers in preflight requests
+//   exposedHeaders: ['Content-Length', 'Authorization'],    // Headers to expose to the browser
+//   credentials: true,                                       // Allow credentials (e.g., cookies)
+//   maxAge: 3600,                                            // Cache preflight requests for 1 hour
+//   preflightContinue: false,                                // Don't continue processing if CORS checks fail
+//   optionsSuccessStatus: 204,                               // HTTP status code for successful preflight requests
+// };
 
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(express.json())
 
 

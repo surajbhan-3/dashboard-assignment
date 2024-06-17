@@ -5,7 +5,7 @@ const {prisma} = require("./config/db")
 const userRouter = require("./routes/userRoutes")
 const productRouter = require("./routes/productRoutes")
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT 
 const app = express()
  const allowedOrigins= ['https://dashboard-assignment-xi.vercel.app']
 const corsOptions = {

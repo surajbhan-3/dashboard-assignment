@@ -11,7 +11,7 @@ const app = express()
 
 app.use(express.json())
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://dashboard-assignment-xi.vercel.app'], // Allowed origins
+  origin:'https://dashboard-assignment-xi.vercel.app', // Allowed origins
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',               // Allowed HTTP methods
   allowedHeaders: 'Content-Type,Authorization',            // Allowed headers in preflight requests
   exposedHeaders: ['Content-Length', 'Authorization'],    // Headers to expose to the browser
@@ -20,6 +20,8 @@ const corsOptions = {
   preflightContinue: false,                                // Don't continue processing if CORS checks fail
   optionsSuccessStatus: 204,                               // HTTP status code for successful preflight requests
 };
+
+
 
 app.use(cors(corsOptions))
 

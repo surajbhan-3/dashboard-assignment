@@ -10,8 +10,8 @@
 // * render
 
 
-const API_BASE_URL = 'https://dashboard-assignment-s4gh.onrender.com';
-export const AUTH_BASE_URL = 'https://dashboard-assignment-s4gh.onrender.com';
+const API_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
+export const AUTH_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
 
 
 

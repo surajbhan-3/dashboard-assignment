@@ -7,7 +7,7 @@ const productRouter = require("./routes/productRoutes")
 
 const PORT = process.env.PORT || 3000
 const app = express()
- const allowedOrigins= ['https://dashboard-assignment-xi.vercel.app', 'http://localhost:3000']
+ const allowedOrigins= ['https://dashboard-assignment-xi.vercel.app']
 const corsOptions = {
  // Allowed origins
    origin: (origin, callback) => {

@@ -1,15 +1,19 @@
-// development server
+// // development server
 // const API_BASE_URL = 'http://localhost:4500';
 // export const AUTH_BASE_URL ='http://localhost:4500';
 
-// production server
+// production server * vercel
 
-const API_BASE_URL = 'https://dashboard-assignment-ec41-flj65ag33-surajbhan3s-projects.vercel.app';
-export const AUTH_BASE_URL = 'https://dashboard-assignment-ec41-flj65ag33-surajbhan3s-projects.vercel.app';
+// const API_BASE_URL = 'https://dashboard-assignment-ec41-flj65ag33-surajbhan3s-projects.vercel.app';
+// export const AUTH_BASE_URL = 'https://dashboard-assignment-ec41-flj65ag33-surajbhan3s-projects.vercel.app';
+
+// * render
 
 
-///  This  is because for the brower to get token i have refresh once after login
-// localStorage.getItem("shopin-token") is called when the module is imported, so it will only be executed once. This means that the value of token will be set to the value that is in localStorage at the time of the import, and it won't be dynamically updated if the token changes later.
+const API_BASE_URL = 'https://dashboard-assignment-s4gh.onrender.com';
+export const AUTH_BASE_URL = 'https://dashboard-assignment-s4gh.onrender.com';
+
+
 
 
 export  const Token = localStorage.getItem("token");

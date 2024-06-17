@@ -7,7 +7,6 @@ import Home from './Pages/Home';
 import AddProduct from './Pages/AddProduct';
 import EditProduct from './Pages/EditProduct';
 function App() {
-  // const userId = localStorage.getItem("userId")
   return (
     <div className="App">
   

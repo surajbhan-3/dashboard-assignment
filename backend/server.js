@@ -8,7 +8,7 @@ const productRouter = require("./routes/productRoutes")
 const PORT = process.env.PORT || 3000
 const app = express()
 const corsOptions = {
-  origin: 'https://dashboard-assignment-xi.vercel.app', // Allowed origins
+  origin: '*', // Allowed origins
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',               // Allowed HTTP methods
   allowedHeaders: 'Content-Type,Authorization',            // Allowed headers in preflight requests
   exposedHeaders: ['Content-Length', 'Authorization'],    // Headers to expose to the browser

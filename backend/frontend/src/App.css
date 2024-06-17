@@ -1,0 +1,167 @@
+/* navbar */
+
+.main-nav{
+  background-color: rgb(46, 44, 44);
+  position: sticky;
+}
+.inner-nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo{
+  margin-top: 10px;
+  margin-left: 10px;
+  color: white;
+}
+
+/* register page and login page css */
+.register-form-heading,.login-form-heading, .edit-form-heading, .add-product-form-heading{
+  text-align: center;
+  margin-top: 8%;
+}
+
+#register-main, #login-main{
+  border: 1px solid rgb(197, 195, 195);
+  max-width: 500px;
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  margin-top: 2%;
+  border-radius: 12px;
+}
+#register-btn{
+  background-color:aquamarine;
+  margin: auto;
+}
+
+#login-btn{
+  background-color:aquamarine;
+  margin: auto;
+  margin-top: 10px;
+}
+#new-user-btn{
+
+  background-color:rgb(240, 235, 235);
+  margin: auto;
+  margin-top: 20px;
+}
+
+
+/* Navbar css */
+.main-nav{
+  max-width: 1650px;
+  width: 100%;
+  border: 1px solid black;
+  height: 60px;
+  margin: auto;
+}
+
+
+/* home css */
+.container-m{
+  background-color: rgb(46, 44, 44);
+
+}
+.home-main-wrapper{
+  max-width: 1650px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+}
+.home-aside{
+  height:100vh;
+  width: 20%;
+  background-color: rgb(46, 44, 44);
+  color: azure;
+}
+.home-aside h3{
+  text-align: center;
+  margin-top: 10px;
+}
+.home-aside-top-div{
+  width: 100%;
+}
+.home-aside input,select{
+  background-color: rgb(168, 172, 172);
+}
+.product-filter-sort{
+ width: 100%;
+ margin: auto;
+}
+.filter-div{
+  display: flex;
+  flex-direction: column;
+  margin:20px;
+}
+.home-main-container{
+  width: 80%;
+  background-color: blueviolet;
+}
+.h-top-bar{
+  width: 100%;
+  background-color: rgb(70, 69, 69);
+  color: azure;
+}
+.dp-mp{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#mp{
+  margin-right: 20px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 12px;
+  margin: 10px;
+
+}
+.dp{
+  margin-left: 10px;
+}
+
+
+.card-wrapper{
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(92, 89, 89);
+  flex-wrap: wrap;
+
+}
+
+/* card component */
+.card{
+  max-width: 300px;
+  width: 300px;
+  min-width: 150px;
+  margin: 10px;
+  background-color: rgb(214, 212, 212);
+}
+.card p{
+  color: white;
+}
+
+
+.img-responsive-21x9 {
+  --tblr-img-responsive-ratio: 70.8571428571%;
+  object-fit: cover;
+}
+
+
+@media (max-width:820px) {
+  .card-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+  }
+ 
+}
+
+@media (max-width:620px) {
+  .card-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+  }
+ 
+}

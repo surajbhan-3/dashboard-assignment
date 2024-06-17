@@ -7,8 +7,16 @@ const productRouter = require("./routes/productRoutes")
 
 const PORT = process.env.PORT || 3000
 const app = express()
+allowedOrigins: ['https://dashboard-assignment-xi.vercel.app', 'http://localhost:3000']
 const corsOptions = {
-  origin: ['https://dashboard-assignment-xi.vercel.app', 'http://localhost:3000'], // Allowed origins
+ // Allowed origins
+   origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+    } else {
+        callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',               // Allowed HTTP methods
   allowedHeaders: 'Content-Type,Authorization',            // Allowed headers in preflight requests
   exposedHeaders: ['Content-Length', 'Authorization'],    // Headers to expose to the browser
@@ -17,6 +25,8 @@ const corsOptions = {
   preflightContinue: false,                                // Don't continue processing if CORS checks fail
   optionsSuccessStatus: 204,                               // HTTP status code for successful preflight requests
 };
+
+
 
 app.use(express.json())
 app.use(cors(corsOptions))

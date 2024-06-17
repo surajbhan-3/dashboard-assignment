@@ -55,6 +55,17 @@ app.get("/", async(req,res)=>{
 app.use("/api/user", userRouter)
 app.use("/api/product", productRouter)
 
+//
+app.use((err, req, res, next) => {
+  if (err) {
+    console.error('CORS Error:', err.message); // Log CORS errors
+    res.status(403).json({ error: 'Not allowed by CORS' });
+  } else {
+    next();
+  }
+});
+
+
 
 const checkDatabaseConnection = async () => {
     try {

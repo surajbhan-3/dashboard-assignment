@@ -1,21 +1,20 @@
 import React from 'react'
-
+import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { AUTH_BASE_URL } from '../config/apiConfig';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../Component/Loading';
 const Register = () => {
-  const navigate = useNavigate()
-  // Define the initial values for the form fields
-  const initialValues = {
-    username: '',
-    email: '',
-    password: '',
-  };
 
-  // Define the validation schema using Yup
-  const validationSchema = Yup.object({
+const navigate = useNavigate()
+const [loading, setLoading] = useState(false)
+// Define the initial values for the form fields
+const initialValues = {username: '', email: '',  password: '',};
+
+// Define the validation schema using Yup
+const validationSchema = Yup.object({
     username: Yup.string()
       .min(3, 'Username must be at least 3 characters')
       .max(20, 'Username must be less than 20 characters')
@@ -30,27 +29,35 @@ const Register = () => {
 
   // Define the onSubmit function
   const onSubmit = async (values, { setSubmitting }) => {
-    setTimeout(() => {
-      console.log('Form data', values);
-      setSubmitting(false);
-    }, 500);
-    const response = await axios.post(`${AUTH_BASE_URL}/api/user/register_user`,values,
-      {
-        headers: {
-          'Content-Type': 'application/json'
+    setLoading(true)
+       try {
+        const response = await axios.post(`${AUTH_BASE_URL}/api/user/register_user`,values,
+          {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+        if(response.data.result === true){
+          setLoading(false)
+          alert("Redirection to Login page")
+          navigate(`/`)
         }
-      }
-    )
-    console.log(response, "resopndedd")
- 
-    if(response.data.result === true){
-      alert("Redirection to Login page")
-      navigate(`/`)
-    }
+       } catch (error) {
+        setLoading(false)
+        console.log(error, "error mesage")
+       alert("An error occurred during register");
+       } finally{
+        setSubmitting(false)
+       }
+       
   };
 
   return (
-    <div>
+    <React.Fragment>
+      {
+        loading?(<Loading />) :
+        <div>
       <h1 className='register-form-heading'>Register</h1>
       <Formik
         initialValues={initialValues}
@@ -91,6 +98,8 @@ const Register = () => {
         )}
       </Formik>
     </div>
+      }
+    </React.Fragment>
   );
 };
 

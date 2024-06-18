@@ -93,7 +93,6 @@ const sortProducts = () => {
 
 
 const handleDelete = async(p_id)=>{
-  console.log(p_id, "hellosdfsdfsd")
   const response = await apiService.delete(`/${userId}/delete_product/${p_id}`)
   console.log(response)
   if(response.status === 204){

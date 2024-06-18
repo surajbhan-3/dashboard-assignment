@@ -197,6 +197,12 @@
 #sp-2{
   display: none;
 }
+.loading-l{
+  margin-top: 20%;
+  margin-left: 20%;
+  margin-right: 20%;
+  width: auto;
+}
 
 @media (max-width:820px) {
   .card-wrapper{

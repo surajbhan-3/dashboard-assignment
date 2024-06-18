@@ -4,15 +4,17 @@ import apiService from '../config/apiServices'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-
+import Loading from '../Component/Loading';
 function Addproduct() {
 const navigate = useNavigate()
-
+const [loading, setLoading] = useState(false)
 const userId = localStorage.getItem('userId')
 
 
 const onSubmit = async (values, { setSubmitting }) => {
-  
+        setLoading(true)
+        console.log(loading, 'loading')
+       
      if(values.settime){
        console.log(values.settime, 'hello')
        setTimeout(async() => {
@@ -20,6 +22,7 @@ const onSubmit = async (values, { setSubmitting }) => {
    console.log(response, "resopndedd")
 
    if(response.data.result === true){
+    setLoading(false)
     alert("Product added successfully")
      navigate(`/${userId}/home`)
    }
@@ -59,7 +62,9 @@ const initialValues = {
 
 
   return (
-    <div className='add-product-form'>
+  <React.Fragment>
+   {loading? (<Loading />) : 
+   (<React.Fragment> <div className='add-product-form'>
     <h1 className='add-product-form-heading'>Add Product</h1>
     <Formik
       initialValues={initialValues}
@@ -130,7 +135,9 @@ const initialValues = {
         </Form>
       )}
     </Formik>
-  </div>
+  </div></React.Fragment>)  
+  }
+  </React.Fragment>
   )
 }
 

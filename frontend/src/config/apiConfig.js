@@ -4,14 +4,14 @@
 
 // production server * vercel
 
-// const API_BASE_URL = 'https://dashboard-assignment-ec41-flj65ag33-surajbhan3s-projects.vercel.app';
-// export const AUTH_BASE_URL = 'https://dashboard-assignment-ec41-flj65ag33-surajbhan3s-projects.vercel.app';
+const API_BASE_URL = 'https://dashboard-assignment-ec41.vercel.app/';
+export const AUTH_BASE_URL = 'https://dashboard-assignment-ec41.vercel.app/';
 
 // * render
 
 
-const API_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
-export const AUTH_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
+// const API_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
+// export const AUTH_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
 
 
 

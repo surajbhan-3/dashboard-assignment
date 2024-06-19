@@ -1,41 +1,32 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import apiService from '../config/apiServices'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Loading from '../Component/Loading';
+import Navbar from '../Component/Navbar';
 function Addproduct() {
-const navigate = useNavigate()
 const [loading, setLoading] = useState(false)
 const userId = localStorage.getItem('userId')
+const {user} = useParams()
+console.log(user, "userlaskjf ")
 
 
 const onSubmit = async (values, { setSubmitting }) => {
         setLoading(true)
         console.log(loading, 'loading')
-       
-     if(values.settime){
-       console.log(values.settime, 'hello')
-       setTimeout(async() => {
-           const response = await apiService.post(`/${userId}/add_product`,values)
-   console.log(response, "resopndedd")
-
-   if(response.data.result === true){
-    setLoading(false)
-    alert("Product added successfully")
-     navigate(`/${userId}/home`)
-   }
-      }, values.settime*60*1000);
-     }else{
-      const response = await apiService.post(`/${userId}/add_product`,values)
+      const response = await apiService.post(`/${user}/add_product`,values)
       console.log(response, "resopndedd")
-      if(response.data.result === true){
+       if(response.data.flag === true){
+        alert("Product added to queue")
+        setLoading(false)
+       }else if(response.data.result === true){
         alert("Product added successfully")
-         navigate(`/${userId}/home`)
+        setLoading(false)
        }
       console.log(values.settime, typeof(values.settime))
-     }
+     
   };
 
 
@@ -52,7 +43,7 @@ const initialValues = {
   const productSchema = Yup.object({
     name: Yup.string().required('product name  is required'),
     image: Yup.string().url('image must be a url').nullable().required('product image url is required'),
-    description: Yup.string().min(20, "minimum 20 characters are required")
+    description: Yup.string().trim('not trailing space needed').strict(true).min(75, "minimum 75 characters are required").max(200, "max 100 characters only")
     .required('product description required'),
     price:Yup.number('it must be a number').required('price is required'),
     settime:Yup.number('it must be a number'),
@@ -64,7 +55,9 @@ const initialValues = {
   return (
   <React.Fragment>
    {loading? (<Loading />) : 
-   (<React.Fragment> <div className='add-product-form'>
+   (<React.Fragment>
+    <Navbar />
+     <div className='add-product-form'>
     <h1 className='add-product-form-heading'>Add Product</h1>
     <Formik
       initialValues={initialValues}

@@ -3,12 +3,12 @@ const { addProduct, editProduct, getSingleProduct, getAllProduct, filterProductB
 const { AuthenticationMiddleware } = require("../middleware/Authentication.middleware");
 const productRouter = Router()
 
-productRouter.post("/:userId/add_product", AuthenticationMiddleware, addProduct);
-productRouter.patch("/:userId/update_product/:id",AuthenticationMiddleware, editProduct);
-productRouter.get("/:userId/single_product/:id",AuthenticationMiddleware, getSingleProduct);
-productRouter.get("/:userId/all_product", AuthenticationMiddleware, getAllProduct);
-productRouter.get("/:userId/filter_products/:category", AuthenticationMiddleware, filterProductByCategory);
-productRouter.delete("/:userId/delete_product/:id", AuthenticationMiddleware, deleteProduct)
+productRouter.post("/:user/add_product", AuthenticationMiddleware, addProduct);
+productRouter.patch("/:user/update_product/:id/:title",AuthenticationMiddleware, editProduct);
+productRouter.get("/:user/single_product/:id/:title",AuthenticationMiddleware, getSingleProduct);
+productRouter.get("/:user/all_product", AuthenticationMiddleware, getAllProduct);
+productRouter.get("/:user/filter_products/:category", AuthenticationMiddleware, filterProductByCategory);
+productRouter.delete("/:user/delete_product/:id/:title", AuthenticationMiddleware, deleteProduct)
 
 
 

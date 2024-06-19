@@ -41,7 +41,7 @@ const validationSchema = Yup.object({
         if(response.data.result === true){
           setLoading(false)
           alert("Redirection to Login page")
-          navigate(`/`)
+          navigate(`/login`)
         }
        } catch (error) {
         setLoading(false)

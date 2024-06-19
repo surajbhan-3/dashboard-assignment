@@ -5,10 +5,13 @@ import {useNavigate} from 'react-router'
 import { AUTH_BASE_URL } from '../config/apiConfig';
 import axios from 'axios';
 import Loading from '../Component/Loading';
+import { AuthContext } from '../Context/AuthContext';
+import { useAuth } from '../Context/AuthContext';
 const Login = () => {
   // Define the initial values for the form fields
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
+  const {setUser,setuId} = useAuth()
   const initialValues = {
     email: '',
     password: '',
@@ -38,12 +41,17 @@ const onSubmit = async (values, { setSubmitting }) => {
               'Content-Type': 'application/json'
             }
           })
-        
+        console.log(response)
            if(response.data.result === true){
              localStorage.setItem('token', response.data.Token)
              localStorage.setItem('userId', response.data.userId)
+             localStorage.setItem('user', JSON.stringify(response.data.user) )
+             setuId(response.data.userId)
+             setUser(response.data.user)
+             const redirectId = JSON.stringify(response.data.user)
+             const cleanRedirectId = redirectId.replace(/"/g, '');
             setLoading(false)
-             navigate(`/${response.data.userId}/home`)
+             navigate(`/${cleanRedirectId}/home`)
            }
           
          } catch (error) {

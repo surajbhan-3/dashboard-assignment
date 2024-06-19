@@ -3,6 +3,7 @@ import Navbar from '../Component/Navbar'
 import Card from '../Component/Card'
 import apiService from '../config/apiServices'
 import {useNavigate} from 'react-router'
+import { useParams } from 'react-router-dom'
 
 function Home() {
   const [data, setData] = useState([])
@@ -12,13 +13,15 @@ function Home() {
   const [maxPrice, setMaxPrice] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
   const navigate = useNavigate()
-  const userId = localStorage.getItem('userId')
-
+  const user = localStorage.getItem('user')
+  console.log(user, user)
+  const cleanUser = user.replace(/"/g, '');
+  const {title} = useParams()
 
   useEffect(()=>{
      const getAllProducts  = async()=>{
     try {
-      const response = await apiService.get(`/${userId}/all_product`)
+      const response = await apiService.get(`/${cleanUser}/all_product`)
       console.log(response)
       
       if(response.data.result===true){
@@ -41,7 +44,7 @@ function Home() {
 
 const handleClick = async()=>{
 
-  navigate(`/${userId}/add_product`)
+  navigate(`/${cleanUser}/add_product`)
 
 }
 
@@ -92,17 +95,22 @@ const sortProducts = () => {
 };
 
 
-const handleDelete = async(p_id)=>{
-  const response = await apiService.delete(`/${userId}/delete_product/${p_id}`)
+const handleDelete = async(p_id,title)=>{
+  const response = await apiService.delete(`/${cleanUser}/delete_product/${p_id}/${title}`)
   console.log(response)
   if(response.status === 204){
     const filterData = data.filter((el)=>{
         if(el.id !== p_id){
           return el;
         }
+       
     })
     setFilteredProducts(filterData)
   }
+}
+
+const handleDefaultClick = () =>{
+     alert('These are default products. Add products please')
 }
 
 const disableButtons = true;
@@ -181,6 +189,7 @@ const disableButtons = true;
                 title={el.name}
                 description={el.description}
                 price={el.price}
+                productDelete = {handleDelete}
               />
             )) : data.map((el) => (
               <Card
@@ -190,7 +199,7 @@ const disableButtons = true;
                 title={el.name}
                 description={el.description}
                 price={el.price}
-                onDelete = {handleDelete}
+                productDelete = {handleDelete}
               />
             ))}
                            
@@ -206,8 +215,9 @@ const disableButtons = true;
               </div>
           </div>
 
-          <div className="card-wrapper">
+          <div className="card-wrapper"  onClick = {handleDefaultClick}>
                               <Card
+                                 
                                   imageUrl="https://www.boat-lifestyle.com/cdn/shop/products/02-3_700x.jpg?v=1656101712"
                                   title="Rockerz 450 DC"
                                   description="Wireless Bluetooth Headphone with 40mm Dynamic Drivers, Upto 15 Hours Playback, Adaptive Headband"

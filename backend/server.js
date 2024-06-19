@@ -6,33 +6,33 @@ const userRouter = require("./routes/userRoutes")
 const productRouter = require("./routes/productRoutes")
 
 const PORT = process.env.PORT 
-// const corsOptions = {
-//   origin: 'https://dashboard-assignment-xi.vercel.app',
-//   // origin: 'http://localhost:3000',
-//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// }
+const corsOptions = {
+  // origin: 'https://dashboard-assignment-xi.vercel.app',
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
 
 const app = express()
-const allowedOrigin = 'https://dashboard-assignment-xi.vercel.app';
+// const allowedOrigin = 'https://dashboard-assignment-xi.vercel.app';
 
-// Middleware to handle CORS and OPTIONS preflight requests
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+// // Middleware to handle CORS and OPTIONS preflight requests
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
+//   if (req.method === 'OPTIONS') {
+//     res.status(200).end();
+//     return;
+//   }
 
-  next();
-});
+//   next();
+// });
 
 
 app.use(express.json())
-// app.use(cors(corsOptions))
+app.use(cors(corsOptions))
 
 
 

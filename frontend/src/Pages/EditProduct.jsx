@@ -5,13 +5,14 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../Component/Navbar';
 
 function Editproduct() {
 const [data, setData] = useState([])
 
-let {product_id,userId} = useParams()
+let {product_id,user,title} = useParams()
 const productId = parseInt(product_id)
-const uId = parseInt(userId)
+
 const navigate = useNavigate()
 
 
@@ -21,7 +22,7 @@ const navigate = useNavigate()
   
      const getSingleProducts  = async()=>{
     try {
-      const response = await apiService.get(`/${uId}/single_product/${productId}`)
+      const response = await apiService.get(`/${user}/single_product/${productId}/${title}`)
   
       if(response.data.result===true){
         setData(response.data.data[0])
@@ -34,7 +35,7 @@ const navigate = useNavigate()
 
      getSingleProducts()
 
-  },[uId,productId])
+  },[user,productId])
   
 const initialValues = {
     name:'',
@@ -51,10 +52,10 @@ const initialValues = {
       console.log('Form data', values);
       setSubmitting(false);
     }, 500);
-    const response = await apiService.patch(`/${userId}/update_product/${product_id}`,values)
+    const response = await apiService.patch(`/${user}/update_product/${product_id}/${title}`,values)
           if(response.data.result === true){
             alert("Product Edited  successfully ")
-            navigate(`/${userId}/home`)
+            navigate(`/${user}/home`)
           }
   };
 
@@ -72,7 +73,10 @@ const initialValues = {
     return <p>Loading...</p>; 
   }
   return (
-    <div>
+
+   <React.Fragment>
+    <Navbar />
+     <div>
     <h1 className='edit-form-heading'>Edit Product</h1>
     <Formik
       initialValues={initialValues}
@@ -132,20 +136,11 @@ const initialValues = {
               </button>
             </div>
           </fieldset>
-          <fieldset>
-            <div>
-              <button id='new-user-btn' className='form-control btn' data-bs-toggle="popover" 
-               data-bs-content="And here's some amazing content. It's very engaging. Right?"
-               type='button'
-              disabled={isSubmitting}>
-                 priview
-              </button>
-            </div>
-          </fieldset>
         </Form>
       )}
     </Formik>
   </div>
+   </React.Fragment>
   )
 }
 

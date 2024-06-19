@@ -15,7 +15,7 @@ datasource db {
 
 model User {
   id        Int     @id @default(autoincrement())
-  username  String
+  username  String  @unique
   email     String  @unique
   password  String  @default("password")
   created_at DateTime @default(now())
@@ -31,7 +31,7 @@ enum ProductType {
 model Product {
   id    Int      @id @default(autoincrement())
   image String
-  name  String
+  name  String   @unique
   price Int
   description String  @default("Add description")
   type  ProductType

@@ -55,8 +55,8 @@ const userLogin = async(req,res)=>{
           if(!verifyPassword){
             return res.status(401).send({message:"Invaid credentials", result:false})
           }
-          const token = jwt.sign({userId:isUserPresent.id, email:isUserPresent.email}, secret, {expiresIn:"7d"})
-          return res.status(200).send({message:"User loged in successfully", Token:token, userId:isUserPresent.id,result:true })
+          const token = jwt.sign({userId:isUserPresent.id, email:isUserPresent.email, user:isUserPresent.username}, secret, {expiresIn:"7d"})
+          return res.status(200).send({message:"User loged in successfully", Token:token, userId:isUserPresent.id, user:isUserPresent.username, result:true })
      } catch (error) {
         return res.status(500).send({message:"Internal Server Error", Error:error.message})
 

@@ -85,14 +85,14 @@ const onSubmit = async (values, { setSubmitting }) => {
                 <fieldset>
                   <div className='mb-1'>
                     <label htmlFor="email" className='form-label required'>Email</label>
-                    <Field type="email" id="email" className='form-control' name="email" />
+                    <Field type="email" placeholder='hello@gmail.com' id="email" className='form-control' name="email" />
                     <ErrorMessage name="email" component="div" />
                   </div>
                 </fieldset>
                 <fieldset>
                   <div className='mb-2'>
                     <label htmlFor="password" className='form-label required'>Password</label>
-                    <Field type="password" id="password" className='form-control' name="password" />
+                    <Field type="password" placeholder='12345678' id="password" className='form-control' name="password" />
                     <ErrorMessage name="password" component="div" />
                   </div>
                 </fieldset>

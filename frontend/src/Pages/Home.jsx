@@ -4,6 +4,7 @@ import Card from '../Component/Card'
 import apiService from '../config/apiServices'
 import {useNavigate} from 'react-router'
 import { useParams } from 'react-router-dom'
+import Loading from '../Component/Loading'
 
 function Home() {
   const [data, setData] = useState([])
@@ -17,9 +18,11 @@ function Home() {
   console.log(user, user)
   const cleanUser = user.replace(/"/g, '');
   const {title} = useParams()
+  const [loading, setLoading] = useState(false)
 
   useEffect(()=>{
      const getAllProducts  = async()=>{
+      setLoading(true)
     try {
       const response = await apiService.get(`/${cleanUser}/all_product`)
       console.log(response)
@@ -29,7 +32,7 @@ function Home() {
           setData(response.data.data)
           console.log(response.data.data)
           console.log(data.length, typeof(data.length))
-       
+           setLoading(false)
         // setFilteredProducts(response.data.data)
       }
     } catch (error) {
@@ -168,90 +171,92 @@ const disableButtons = true;
         
 
         </aside>
-       <div className="home-main-container">
-         {
-          (data.length!==0)? (
-            <React.Fragment>
-
-<div className="h-top-bar">
-              <div className='dp-mp'>
-                  <div className='dp'><h2>Products List</h2></div>
-                  <div><button onClick={handleClick} id='mp'>{<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>} Add Products</button></div>
-              </div>
-          </div>
-
-          <div className="card-wrapper">
-          {filteredProducts.length ? filteredProducts.map((el) => (
-              <Card
-                key={el.id}
-                product_id={el.id}
-                imageUrl={el.image}
-                title={el.name}
-                description={el.description}
-                price={el.price}
-                productDelete = {handleDelete}
-              />
-            )) : data.map((el) => (
-              <Card
-                key={el.id}
-                product_id={el.id}
-                imageUrl={el.image}
-                title={el.name}
-                description={el.description}
-                price={el.price}
-                productDelete = {handleDelete}
-              />
-            ))}
-                           
-          </div>
-            </React.Fragment>
-          ): (
-            <React.Fragment>
-
-<div className="h-top-bar">
-              <div className='dp-mp'>
-                  <div className='dp'>Default Products</div>
-                  <div><button id='mp' onClick={handleClick}  > {<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>} Add Products</button></div>
-              </div>
-          </div>
-
-          <div className="card-wrapper"  onClick = {handleDefaultClick}>
-                              <Card
-                                 
-                                  imageUrl="https://www.boat-lifestyle.com/cdn/shop/products/02-3_700x.jpg?v=1656101712"
-                                  title="Rockerz 450 DC"
-                                  description="Wireless Bluetooth Headphone with 40mm Dynamic Drivers, Upto 15 Hours Playback, Adaptive Headband"
-                                  price="1250"
-                                  disableButtons={disableButtons}
-                                />
-                              <Card
-                                  imageUrl="https://www.boat-lifestyle.com/cdn/shop/products/02-3_700x.jpg?v=1656101712"
-                                  title="Rockerz 450 DC"
-                                  description="Wireless Bluetooth Headphone with 40mm Dynamic Drivers, Upto 15 Hours Playback, Adaptive Headband"
-                                  price="1250"
-                                  disableButtons={disableButtons}
-                                />
-                              <Card
-                                  imageUrl="https://www.boat-lifestyle.com/cdn/shop/products/02-3_700x.jpg?v=1656101712"
-                                  title="Rockerz 450 DC"
-                                  description="Wireless Bluetooth Headphone with 40mm Dynamic Drivers, Upto 15 Hours Playback, Adaptive Headband"
-                                  price="1250"
-                                  disableButtons={disableButtons}
-                                />
-          </div>
-
-          <div>
-            <div className='yp' >Your Products</div>
-               <div className='yp-inner'>
-               No Products  available Please add products 
+      {
+        !loading?(<React.Fragment><Loading /></React.Fragment>):( <div className="home-main-container">
+          {
+           (data.length!==0)? (
+             <React.Fragment>
+ 
+ <div className="h-top-bar">
+               <div className='dp-mp'>
+                   <div className='dp'><h2>Products List</h2></div>
+                   <div><button onClick={handleClick} id='mp'>{<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>} Add Products</button></div>
                </div>
-          </div>
-            </React.Fragment>
-          )
-         }
-                
-                
-        </div>
+           </div>
+ 
+           <div className="card-wrapper">
+           {filteredProducts.length ? filteredProducts.map((el) => (
+               <Card
+                 key={el.id}
+                 product_id={el.id}
+                 imageUrl={el.image}
+                 title={el.name}
+                 description={el.description}
+                 price={el.price}
+                 productDelete = {handleDelete}
+               />
+             )) : data.map((el) => (
+               <Card
+                 key={el.id}
+                 product_id={el.id}
+                 imageUrl={el.image}
+                 title={el.name}
+                 description={el.description}
+                 price={el.price}
+                 productDelete = {handleDelete}
+               />
+             ))}
+                            
+           </div>
+             </React.Fragment>
+           ): (
+             <React.Fragment>
+ 
+ <div className="h-top-bar">
+               <div className='dp-mp'>
+                   <div className='dp'>Default Products</div>
+                   <div><button id='mp' onClick={handleClick}  > {<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>} Add Products</button></div>
+               </div>
+           </div>
+ 
+           <div className="card-wrapper"  onClick = {handleDefaultClick}>
+                               <Card
+                                  
+                                   imageUrl="https://www.boat-lifestyle.com/cdn/shop/products/02-3_700x.jpg?v=1656101712"
+                                   title="Rockerz 450 DC"
+                                   description="Wireless Bluetooth Headphone with 40mm Dynamic Drivers, Upto 15 Hours Playback, Adaptive Headband"
+                                   price="1250"
+                                   disableButtons={disableButtons}
+                                 />
+                               <Card
+                                   imageUrl="https://www.boat-lifestyle.com/cdn/shop/products/02-3_700x.jpg?v=1656101712"
+                                   title="Rockerz 450 DC"
+                                   description="Wireless Bluetooth Headphone with 40mm Dynamic Drivers, Upto 15 Hours Playback, Adaptive Headband"
+                                   price="1250"
+                                   disableButtons={disableButtons}
+                                 />
+                               <Card
+                                   imageUrl="https://www.boat-lifestyle.com/cdn/shop/products/02-3_700x.jpg?v=1656101712"
+                                   title="Rockerz 450 DC"
+                                   description="Wireless Bluetooth Headphone with 40mm Dynamic Drivers, Upto 15 Hours Playback, Adaptive Headband"
+                                   price="1250"
+                                   disableButtons={disableButtons}
+                                 />
+           </div>
+ 
+           <div>
+             <div className='yp' >Your Products</div>
+                <div className='yp-inner'>
+                No Products  available Please add products 
+                </div>
+           </div>
+             </React.Fragment>
+           )
+          }
+                 
+                 
+         </div>)
+      }
 
       </div>
     </div>

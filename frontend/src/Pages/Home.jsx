@@ -172,7 +172,7 @@ const disableButtons = true;
 
         </aside>
       {
-        !loading?(<React.Fragment><Loading /></React.Fragment>):( <div className="home-main-container">
+        loading?(<React.Fragment><Loading /></React.Fragment>):( <div className="home-main-container">
           {
            (data.length!==0)? (
              <React.Fragment>

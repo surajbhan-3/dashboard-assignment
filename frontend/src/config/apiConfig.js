@@ -10,13 +10,13 @@
 // * render
 
 
-// const API_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
-// export const AUTH_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
+const API_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
+export const AUTH_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
 
 
 //* aws
-const API_BASE_URL = 'http://13.235.15.76:4500';
-export const AUTH_BASE_URL = 'http://13.235.15.76:4500';
+// const API_BASE_URL = 'http://13.235.15.76:4500';
+// export const AUTH_BASE_URL = 'http://13.235.15.76:4500';
 
 export const getToken = () => localStorage.getItem("token");
 

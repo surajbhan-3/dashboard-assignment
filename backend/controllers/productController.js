@@ -26,7 +26,6 @@ console.log(type, "types")
           
             return words.join(' ');
           }
-        
        if(settime){
         res.status(200).send({ message: 'Your product is added to the queue and will be processed shortly', flag:true, result: true });
         setTimeout(async()=>{
@@ -221,6 +220,7 @@ const getAllProduct = async(req,res)=>{
     const {user}=req.params
     const authenticatedUser = req.body.user
     const userId = req.body.userId;
+    console.log(authenticatedUser, "auuser", userId)
    console.log(user, 'user ')
    try {
     if(authenticatedUser !== user){

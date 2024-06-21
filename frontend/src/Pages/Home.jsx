@@ -3,7 +3,6 @@ import Navbar from '../Component/Navbar'
 import Card from '../Component/Card'
 import apiService from '../config/apiServices'
 import {useNavigate} from 'react-router'
-import { useParams } from 'react-router-dom'
 import Loading from '../Component/Loading'
 import { useAuth } from '../Context/AuthContext'
 
@@ -16,12 +15,11 @@ function Home() {
   const [sortOrder, setSortOrder] = useState('asc');
   const navigate = useNavigate()
   const {setUserName} = useAuth()
-  const us = localStorage.getItem('user')
-  const {user} = useParams()
+  const user= localStorage.getItem('user')
  
 
 
-  const cleanUser = us.replace(/"/g, '');
+  const cleanUser = user.replace(/"/g, '');
   const [loading, setLoading] = useState(false)
 
   useEffect(()=>{
@@ -29,7 +27,12 @@ function Home() {
      const getAllProducts  = async()=>{
       setLoading(true)
     try {
-      const response = await apiService.get(`/${cleanUser}/all_product`)
+      const response = await apiService.get(`/${cleanUser}/all_product`,{
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        }
+      })
       
       if(response.data.result===true){
      
@@ -44,7 +47,7 @@ function Home() {
 
      getAllProducts()
 
-  },[])
+  },[user])
 
 
 const handleClick = async()=>{

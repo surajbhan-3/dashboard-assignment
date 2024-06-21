@@ -14,7 +14,12 @@ const {user} = useParams()
 
 const onSubmit = async (values, { setSubmitting }) => {
         setLoading(true)
-      const response = await apiService.post(`/${user}/add_product`,values)
+      const response = await apiService.post(`/${user}/add_product`,values,{
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        }
+      })
        if(response.data.flag === true){
         alert("Product added to queue")
         setLoading(false)
@@ -24,6 +29,7 @@ const onSubmit = async (values, { setSubmitting }) => {
        }
   };
 
+  
 
 const initialValues = {
     name:'',

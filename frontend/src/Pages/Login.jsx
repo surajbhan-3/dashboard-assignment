@@ -11,7 +11,7 @@ const Login = () => {
   // Define the initial values for the form fields
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
-  const {setUser,setuId} = useAuth()
+  const {setUserName,setuId} = useAuth()
   const initialValues = {
     email: '',
     password: '',
@@ -33,7 +33,6 @@ const Login = () => {
 
 // Define the onSubmit function
 const onSubmit = async (values, { setSubmitting }) => {
-    console.log('hlsdfsd')
        setLoading(true)
          try {
           const response = await axios.post(`${AUTH_BASE_URL}/api/user/login`,values, {
@@ -41,13 +40,12 @@ const onSubmit = async (values, { setSubmitting }) => {
               'Content-Type': 'application/json'
             }
           })
-        console.log(response)
            if(response.data.result === true){
-             localStorage.setItem('token', response.data.Token)
-             localStorage.setItem('userId', response.data.userId)
+           localStorage.setItem('token', response.data.Token)
+            localStorage.setItem('userId', response.data.userId)
              localStorage.setItem('user', JSON.stringify(response.data.user) )
-             setuId(response.data.userId)
-             setUser(response.data.user)
+             setuId(localStorage.getItem('userId'))
+             setUserName(localStorage.getItem('user'))
              const redirectId = JSON.stringify(response.data.user)
              const cleanRedirectId = redirectId.replace(/"/g, '');
             setLoading(false)
@@ -56,7 +54,6 @@ const onSubmit = async (values, { setSubmitting }) => {
           
          } catch (error) {
           setLoading(false)
-          console.log(error, "error mesage")
          alert("An error occurred during login:");
          } finally{
           setSubmitting(false)

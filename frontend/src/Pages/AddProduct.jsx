@@ -3,21 +3,18 @@ import React, { useState } from 'react'
 import apiService from '../config/apiServices'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useNavigate, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import Loading from '../Component/Loading';
 import Navbar from '../Component/Navbar';
 function Addproduct() {
 const [loading, setLoading] = useState(false)
-const userId = localStorage.getItem('userId')
 const {user} = useParams()
-console.log(user, "userlaskjf ")
+
 
 
 const onSubmit = async (values, { setSubmitting }) => {
         setLoading(true)
-        console.log(loading, 'loading')
       const response = await apiService.post(`/${user}/add_product`,values)
-      console.log(response, "resopndedd")
        if(response.data.flag === true){
         alert("Product added to queue")
         setLoading(false)
@@ -25,8 +22,6 @@ const onSubmit = async (values, { setSubmitting }) => {
         alert("Product added successfully")
         setLoading(false)
        }
-      console.log(values.settime, typeof(values.settime))
-     
   };
 
 

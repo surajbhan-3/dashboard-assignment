@@ -5,6 +5,7 @@ import apiService from '../config/apiServices'
 import {useNavigate} from 'react-router'
 import { useParams } from 'react-router-dom'
 import Loading from '../Component/Loading'
+import { useAuth } from '../Context/AuthContext'
 
 function Home() {
   const [data, setData] = useState([])
@@ -14,24 +15,25 @@ function Home() {
   const [maxPrice, setMaxPrice] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
   const navigate = useNavigate()
-  const user = localStorage.getItem('user')
-  console.log(user, user)
-  const cleanUser = user.replace(/"/g, '');
-  const {title} = useParams()
+  const {setUserName} = useAuth()
+  const us = localStorage.getItem('user')
+  const {user} = useParams()
+ 
+
+
+  const cleanUser = us.replace(/"/g, '');
   const [loading, setLoading] = useState(false)
 
   useEffect(()=>{
+    setUserName(user)
      const getAllProducts  = async()=>{
       setLoading(true)
     try {
       const response = await apiService.get(`/${cleanUser}/all_product`)
-      console.log(response)
       
       if(response.data.result===true){
      
           setData(response.data.data)
-          console.log(response.data.data)
-          console.log(data.length, typeof(data.length))
            setLoading(false)
         // setFilteredProducts(response.data.data)
       }
@@ -56,7 +58,6 @@ useEffect(() => {
 }, [type,minPrice,maxPrice]);
 
 useEffect(() => {
-  console.log("sorteign")
   sortProducts();
 }, [sortOrder]);
 
@@ -100,7 +101,6 @@ const sortProducts = () => {
 
 const handleDelete = async(p_id,title)=>{
   const response = await apiService.delete(`/${cleanUser}/delete_product/${p_id}/${title}`)
-  console.log(response)
   if(response.status === 204){
     const filterData = data.filter((el)=>{
         if(el.id !== p_id){
@@ -115,6 +115,8 @@ const handleDelete = async(p_id,title)=>{
 const handleDefaultClick = () =>{
      alert('These are default products. Add products please')
 }
+
+
 
 const disableButtons = true;
   return (
@@ -184,27 +186,31 @@ const disableButtons = true;
                </div>
            </div>
  
-           <div className="card-wrapper">
+           <div className="card-wrapper"  >
            {filteredProducts.length ? filteredProducts.map((el) => (
+            <div  key={el.id}>
                <Card
-                 key={el.id}
                  product_id={el.id}
                  imageUrl={el.image}
                  title={el.name}
                  description={el.description}
                  price={el.price}
                  productDelete = {handleDelete}
+                
                />
+               </div>
              )) : data.map((el) => (
+              <div  key={el.id}>
                <Card
-                 key={el.id}
                  product_id={el.id}
                  imageUrl={el.image}
                  title={el.name}
                  description={el.description}
                  price={el.price}
                  productDelete = {handleDelete}
+                
                />
+               </div>
              ))}
                             
            </div>

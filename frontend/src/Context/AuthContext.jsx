@@ -9,7 +9,7 @@ export const useAuth = () => {
   };
   
   export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    const [userName, setUserName] = useState(null);
     const [uId, setuId] = useState(null);
 
     useEffect(() => {
@@ -19,14 +19,16 @@ export const useAuth = () => {
         const token = localStorage.getItem('token');
     
         if (storedUser && storedUserId && token) {
-          setUser(storedUser);
+          setUserName(storedUser);
           setuId(storedUserId);
         }
-      }, [uId, user]);
+      }, []);
+
+     
   
 
     return (
-      <AuthContext.Provider value={{ user, setUser, uId, setuId }}>
+      <AuthContext.Provider value={{ userName, setUserName, uId, setuId }}>
         {children}
       </AuthContext.Provider>
     );

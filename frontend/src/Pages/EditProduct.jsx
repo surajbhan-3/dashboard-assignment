@@ -49,7 +49,6 @@ const initialValues = {
 
   const onSubmit = async (values, { setSubmitting }) => {
     setTimeout(() => {
-      console.log('Form data', values);
       setSubmitting(false);
     }, 500);
     const response = await apiService.patch(`/${user}/update_product/${product_id}/${title}`,values)

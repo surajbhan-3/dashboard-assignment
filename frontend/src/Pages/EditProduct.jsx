@@ -51,7 +51,12 @@ const initialValues = {
     setTimeout(() => {
       setSubmitting(false);
     }, 500);
-    const response = await apiService.patch(`/${user}/update_product/${product_id}/${title}`,values)
+    const response = await apiService.patch(`/${user}/update_product/${product_id}/${title}`,values,{
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      }
+    })
           if(response.data.result === true){
             alert("Product Edited  successfully ")
             navigate(`/${user}/home`)

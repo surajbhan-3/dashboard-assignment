@@ -11,13 +11,17 @@
 // * render
 
 
-const API_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
-export const AUTH_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
+// const API_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
+// export const AUTH_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
 
 
 //* aws
 // const API_BASE_URL = 'http://13.235.15.76:4500';
 // export const AUTH_BASE_URL = 'http://13.235.15.76:4500';
+
+//* aws elastic beanstalk
+const API_BASE_URL = 'http://kryzen-app-env.eba-mhj6baup.ap-south-1.elasticbeanstalk.com';
+export const AUTH_BASE_URL = 'http://kryzen-app-env.eba-mhj6baup.ap-south-1.elasticbeanstalk.com';
 
 export const getToken = () => localStorage.getItem("token");
 
@@ -29,7 +33,7 @@ const apiConfig = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${getToken()}`,
   },
-  // timeout: 5000, // Request timeout in milliseconds
+  timeout: 5000, // Request timeout in milliseconds
 };
 
 

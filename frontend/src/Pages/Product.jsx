@@ -13,7 +13,12 @@ function Product() {
   useEffect(()=>{
     const getSingleProducts  = async()=>{
    try {
-     const response = await apiService.get(`/${user}/single_product/${product_id}/${title}`)
+     const response = await apiService.get(`/${user}/single_product/${product_id}/${title}`,{
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      }
+    })
      if(response.data.result===true){
        setData(response.data.data[0])
      }

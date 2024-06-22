@@ -38,10 +38,12 @@ app.get("/", async(req,res)=>{
     }
 })
 
+//* router
 app.use("/api/user", userRouter)
 app.use("/api/product", productRouter)
 
-//
+
+// 
 app.use((err, req, res, next) => {
   if (err) {
     console.error('CORS Error:', err.message); // Log CORS errors

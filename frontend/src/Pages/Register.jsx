@@ -10,6 +10,8 @@ const Register = () => {
 
 const navigate = useNavigate()
 const [loading, setLoading] = useState(false)
+const [credentialError , setCredentialError] = useState('')
+
 // Define the initial values for the form fields
 const initialValues = {username: '', email: '',  password: '',};
 
@@ -46,7 +48,13 @@ const validationSchema = Yup.object({
        } catch (error) {
         setLoading(false)
         console.log(error, "error mesage")
-       alert("An error occurred during register");
+        console.log(error.response.data, 'dsf')
+          if(error.response.status === 500){
+            setCredentialError("Username should be unique")
+          }else{
+            setCredentialError(error.response.data.message)
+          }
+          
        } finally{
         setSubmitting(false)
        }
@@ -92,6 +100,7 @@ const validationSchema = Yup.object({
                 <button id='register-btn' className='form-control' type="submit" disabled={isSubmitting}>
                     Register
                 </button>
+                {credentialError && <div id='show-error'>{credentialError}</div>}
                 </div>
                 </fieldset>
           </Form>

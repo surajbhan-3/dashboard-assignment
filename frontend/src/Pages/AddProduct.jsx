@@ -8,12 +8,14 @@ import Loading from '../Component/Loading';
 import Navbar from '../Component/Navbar';
 function Addproduct() {
 const [loading, setLoading] = useState(false)
+const [credentialError , setCredentialError] = useState('')
 const {user} = useParams()
 
 
 
 const onSubmit = async (values, { setSubmitting }) => {
         setLoading(true)
+     try {
       const response = await apiService.post(`/${user}/add_product`,values,{
         headers: {
           'Content-Type': 'application/json',
@@ -27,6 +29,12 @@ const onSubmit = async (values, { setSubmitting }) => {
         alert("Product added successfully")
         setLoading(false)
        }
+     } catch (error) {
+        if(error.response.status=== 500){
+             setCredentialError("Product name should be unique")
+        }
+        setLoading(false)
+     }
   };
 
   
@@ -72,6 +80,7 @@ const initialValues = {
               <label htmlFor="product_name" className='form-label required'>Product Name</label>
               <Field type="text" id="product_name" className='form-control' name="name" />
               <ErrorMessage name="product_name" component="div" />
+              {credentialError && <div id='show-error'>{credentialError}</div>}
             </div>
           </fieldset>
           <fieldset>

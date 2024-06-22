@@ -12,6 +12,7 @@ const Login = () => {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const {setUserName,setuId} = useAuth()
+  const [credentialError , setCredentialError] = useState('')
   const initialValues = {
     email: '',
     password: '',
@@ -40,6 +41,7 @@ const onSubmit = async (values, { setSubmitting }) => {
               'Content-Type': 'application/json'
             }
           })
+          console.log(response,'sdf')
            if(response.data.result === true){
             localStorage.setItem('token', response.data.Token)
             localStorage.setItem('userId', response.data.userId)
@@ -54,7 +56,9 @@ const onSubmit = async (values, { setSubmitting }) => {
           
          } catch (error) {
           setLoading(false)
-         alert("An error occurred during login:");
+          console.log(error.response.data, 'dsf')
+          setCredentialError(error.response.data.message)
+        
          } finally{
           setSubmitting(false)
          }
@@ -83,7 +87,7 @@ const onSubmit = async (values, { setSubmitting }) => {
                   <div className='mb-1'>
                     <label htmlFor="email" className='form-label required'>Email</label>
                     <Field type="email" placeholder='hello@gmail.com' id="email" className='form-control' name="email" />
-                    <ErrorMessage name="email" component="div" />
+                    <ErrorMessage name="email"  component="div" />
                   </div>
                 </fieldset>
                 <fieldset>
@@ -105,8 +109,10 @@ const onSubmit = async (values, { setSubmitting }) => {
                     <button id='new-user-btn' onClick={handleRegister} className='form-control' type="button" disabled={isSubmitting}>
                        Register
                     </button>
+                    {credentialError && <div id='show-error'>{credentialError}</div>}
                   </div>
                 </fieldset>
+                
               </Form>
             )}
           </Formik>

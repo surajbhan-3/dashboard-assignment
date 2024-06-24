@@ -11,8 +11,8 @@
 // * render
 
 
-// const API_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
-// export const AUTH_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
+const API_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
+export const AUTH_BASE_URL = 'https://dashboard-assignment-t2ro.onrender.com';
 
 
 //* aws
@@ -25,8 +25,8 @@
 
 
 //* aws elastic loadblancer
-const API_BASE_URL = 'https://krylb-2021498952.ap-south-1.elb.amazonaws.com';
-export const AUTH_BASE_URL = 'https://krylb-2021498952.ap-south-1.elb.amazonaws.com';
+// const API_BASE_URL = 'https://krylb-2021498952.ap-south-1.elb.amazonaws.com';
+// export const AUTH_BASE_URL = 'https://krylb-2021498952.ap-south-1.elb.amazonaws.com';
 
 
 export const getToken = () => localStorage.getItem("token");
